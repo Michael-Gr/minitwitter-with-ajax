@@ -2,7 +2,15 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :new]
   # GET /tweets
   def index
-    @tweets = Tweet.all.order("created_at DESC")
+    user = User.find_by(id: params["user"])
+
+    if user
+      @tweets = user.tweets
+    else
+      @tweets = Tweet.all.order("created_at DESC")
+    end
+
+    @users = User.all
   end
 
   # GET /tweets/1

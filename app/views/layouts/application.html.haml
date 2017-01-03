@@ -38,6 +38,12 @@
               = link_to "Moments", "#"
             %li
               = link_to "Search", "#"
+            %li
+              %form.navbar-form{action: tweets_path}
+                .formgroup
+                  = select_tag "user", options_from_collection_for_select(@users, "id", "email"), prompt: "User", class: "form-control"
+                  %button{type: "submit"}
+                    Search
           %ul.nav.navbar-nav.navbar-right
             -# %li
             -#   = link_to current_user.email
