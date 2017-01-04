@@ -1,5 +1,6 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :new]
+
   # GET /tweets
   def index
     user = User.find_by(id: params["user"])
@@ -9,8 +10,6 @@ class TweetsController < ApplicationController
     else
       @tweets = Tweet.all.order("created_at DESC")
     end
-
-    @users = User.all
   end
 
   # GET /tweets/1

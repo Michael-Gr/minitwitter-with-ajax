@@ -36,14 +36,12 @@
                 New Tweet
             %li
               = link_to "Moments", "#"
-            %li
+            %li.toggle
               = link_to "Search", "#"
-            %li
+            %li.search
               %form.navbar-form{action: tweets_path}
                 .formgroup
-                  = select_tag "user", options_from_collection_for_select(@users, "id", "email"), prompt: "User", class: "form-control"
-                  %button{type: "submit"}
-                    Search
+                  = select_tag "user", options_from_collection_for_select(User.all, "id", "email"), prompt: "User", class: "form-control"
           %ul.nav.navbar-nav.navbar-right
             -# %li
             -#   = link_to current_user.email
