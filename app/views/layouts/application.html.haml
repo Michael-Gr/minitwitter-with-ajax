@@ -17,7 +17,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    %nav.navbar.navbar-fixed-top{role: "navigation"}
+    %nav.navbar{role: "navigation"}
       .container
         .navbar-header
           %button.navbar-toggle.collapsed{type: "button", data: {toggle: "collapse", target: "#navbar"}, aria: {expanded: "false", controls: "navbar"} }
@@ -34,14 +34,21 @@
             %li
               = link_to new_tweet_path do
                 New Tweet
-            %li
-              = link_to "Moments", "#"
-            %li.toggle
-              = link_to "Search", "#"
+            %li.navbar-text.toggle
+              Search
             %li.search
-              %form.navbar-form{action: tweets_path}
-                .formgroup
-                  = select_tag "user", options_from_collection_for_select(User.all, "id", "email"), prompt: "User", class: "form-control"
+              -# -# Code for user dropdown. Corresponding code commented out in tweet.js and tweets_controller.rb
+              -# %form.navbar-form{action: tweets_path}
+              -#   .formgroup
+              -#     = select_tag "user", options_from_collection_for_select(User.all, "id", "email"), prompt: "User", class: "form-control"
+              %form.navbar-form{:role => "search"}
+                .input-group
+                  %input.form-control{:id => "q", :name => "q", :placeholder => "Search Tweets", :type => "text"}/
+                  .input-group-btn
+                    %button.btn.btn-default{:type => "submit"}
+                      %i.glyphicon.glyphicon-search
+
+
           %ul.nav.navbar-nav.navbar-right
             -# %li
             -#   = link_to current_user.email

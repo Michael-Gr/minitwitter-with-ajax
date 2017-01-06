@@ -3,13 +3,21 @@ class TweetsController < ApplicationController
 
   # GET /tweets
   def index
-    user = User.find_by(id: params["user"])
+    # # Code for user dropdown
+    # # Also commented out code on tweet.js and application.html.haml
+    # user = User.find_by(id: params["user"])
 
-    if user
-      @tweets = user.tweets
+    search_text = params["text"]
+
+    if search_text
+      @tweets = Tweet.all.where("text like ?", "%#{search_text}%")
+    # # More user dropdown code
+    # elsif user
+    #   @tweets = user.tweets
     else
       @tweets = Tweet.all.order("created_at DESC")
     end
+
   end
 
   # GET /tweets/1
